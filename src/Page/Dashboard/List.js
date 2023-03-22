@@ -6,7 +6,7 @@ class List extends React.Component{
     constructor(){
         super();
         this.state={
-            data:[]
+            data:[], data2:[]
         };
     }
 
@@ -19,24 +19,51 @@ class List extends React.Component{
             });
             console.log(data)
         });
+        fetch('http://127.0.0.1:8000/faculty/')
+        .then(response=>response.json())
+        .then((data2)=>{
+            this.setState({
+                data2:data2
+            });
+            console.log(data2)
+        });
     }
+
+ 
 
     componentDidMount(){
         this.fetchData();
     }
+
+    // constructor(){
+    //     super();
+    //     this.state={
+    //         data2:[]
+    //     };
+    // }
+
 
 
    
     render(){
 
         const noteSheet=this.state.data;
-        const rows=noteSheet.map((note)=>
+        const noteSheet2=this.state.data2;
+        const rows2=noteSheet2.map((note)=>
+            <td>{note.Name}</td>
+          
+        );
 
+        const rows=noteSheet.map((note,i)=>
         <tr key={note.f_id}>
         <td>{note.id}</td>
-        <td>{note.subject}</td>  {/* !should be updated */}
-        <td>{note.sender}</td>    {/* !should be updated */}
-        <td>{note.date}</td>
+        <td>{note.subject}</td>  
+        <td>{rows2[i]}</td>   
+      <td>  {note.date}</td>
+
+
+
+
         <td className='text-right'>
             <button className='button muted-button'>Approve</button>
         </td>
