@@ -9,7 +9,7 @@ body, html, #root, .app, .container {
   .container {
     font-size: 28px;
     color: #000;
-    display: flex;
+    /*display: flex;*/
     flex-direction: column;
     align-items: center;
     justify-content: center;
