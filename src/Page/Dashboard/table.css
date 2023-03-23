@@ -3,27 +3,37 @@
     background-color: #D9D9D9;
     margin-top: 10px;
     margin-bottom:10px;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
     margin-right: auto;
-    text-align:left;
-    width:100%;
-    display:inline-table;
-    overflow: auto;
+    text-align:center;
+    /*width:100%;*/
+    /*display:inline-table;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     border-style: 2px solid rgba(255, 255, 255, 0.878);
-    overflow-x:hidden;
+    justify-content: center;
+    
 }
+
+/*div.contain-table{
+    display:flex;
+}*/
 
 .contain-table{
     align-items: flex-start;
+    max-width: 100%;
+    padding:5px;
+    overflow-y: auto;
 }
 
 .container,.small-container,.medium-container{
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: auto;
+    margin-right: auto;
     padding:15px;
     width:100%;
+    
     
 }
 .button,
@@ -47,7 +57,17 @@ button:focus{
     border-style: none;
 }
 
-@media(max-width:845px){
+#root{
+    justify-content: center;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+div{
+    display:block;
+}
+
+@media(max-width:1000px){
     .container{
         width:100%;
         padding:10px;
@@ -58,17 +78,37 @@ button:focus{
         overflow-x: hidden;
     }
     .table{
-        width:90%;
+        width:100%;
 
     }
-    .button,
+    .tbody{
+        width:70%;
+    }
+    
     td,
     th{
+        font-size: 15px;
+    }
+
+    .button{
+        width: 70px;
         font-size: 12px;
+        margin: 0 0 0.25rem 0.5rem;
+        text-align: left;
+    }
+
+    .button muted-button{
+        
+        margin-left: 5px;
+    }
+
+    .text-right,
+    .text-center{
+        text-align: left; 
     }
 }
 
-@media(max-width:700px){
+@media(max-width:900px){
     .container{
         width:95%;
         padding:7px;
@@ -76,7 +116,7 @@ button:focus{
         
     }
     .contain-table{
-        width:100%;
+        width:75%;
         overflow-x: hidden;
         
     }
@@ -101,6 +141,7 @@ button:focus{
         display:inline-block;
         font-size: 15px;
     }
+
     td::before{
         content:attr(th);
     }
