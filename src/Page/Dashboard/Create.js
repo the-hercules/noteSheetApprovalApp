@@ -103,7 +103,18 @@ function Create({ faculty, setFaculty, setIsCreating }){
                         <input id='convener' name='convener' type='text' placeholder='Convener 2' />
                     </div>
                 </div>
-                <div className='gender-box'>
+                <div className='input-box'>
+                    <label htmlFor='receivers'>Select Authorities for Approval</label>
+                    <div className='select-box'>
+                        <select required>
+                            <option hidden>Choose an option</option>
+                            <option>HoD</option>
+                            <option>Director</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+                </div>
+                {/* <div className='gender-box'>
                     <h3>Select Authorities for Approval</h3>
                     <div class="gender-option">
                     <input type="checkbox" name="hod" id="hod" value="hod" />
@@ -112,8 +123,8 @@ function Create({ faculty, setFaculty, setIsCreating }){
                     <label htmlFor="director">Director</label>
                     <input type="checkbox" name="others" id="others" value="others" />
                     <label htmlFor="others">Others</label>
-                </div>
-            </div>
+                    </div>
+                </div> */}
             <div class="buttons">
                 <input type="submit" value="Create" />
                 <input className="muted-button" type="button" value="Cancel" onClick={() => setIsCreating(false)} />
