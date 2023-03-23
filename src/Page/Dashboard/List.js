@@ -1,4 +1,5 @@
 import React from 'react'
+import './table.css'
 
 
 class List extends React.Component{
@@ -91,7 +92,7 @@ class List extends React.Component{
         
         return (
             <div className='contain-table'>
-                <table className='striped-table'>
+                <table className='table'>
                     <thead>
                         <tr>
                         <th>No.</th>
