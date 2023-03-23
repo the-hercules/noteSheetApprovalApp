@@ -2,7 +2,9 @@
     width:600px;
     margin-bottom: 20px;
 }
-
+.container::-webkit-scrollbar { 
+    display: none;  
+}
 label{
     font-family: 'Inter', sans-serif;
     font-size: 20px;
@@ -13,20 +15,20 @@ label{
     margin-top: 0%;
 }
 
-.gender-option{
+/* .gender-option{
     display: flex;
     margin-bottom: 30px;
-}
+} */
 [type=checkbox]{
     margin-left: 15px;
     margin-right: 5px;
     margin-top: 10px;
 }
 
-.gender-option label{
+/* .gender-option label{
     font-family: 'Inter', sans-serif;
     font-size: 17px;
-}
+} */
 
 h3{
     margin:0;
