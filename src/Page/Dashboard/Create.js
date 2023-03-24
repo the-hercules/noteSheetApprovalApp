@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useState  , useEffect} from 'react'
+import { useNavigate , useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './create.css';
 
 function Create({ faculty, setFaculty, setIsCreating }){
-
+    // const navigate = useNavigate();
+    const { id } = useParams();
+    // const [f_id, setf_id] = useState('');
     const [date, setDate] = useState('');
     const [sub, setSubject] = useState('');
     const [desc, setDescription] = useState('');
     const [obj, setObjective] = useState('');
     const [details, setDetails] = useState('');
+    const [school, setSchool] = useState('');
+    const [depart, setDepart] = useState('');
+
+    // const [pro_de, setpro_de] = useState('');
+    const [pro_sub, set_prosub] = useState('');
+    const [pro_sub1, set_prosub1] = useState('');
+    const [receiver_1, setreceiver_1] = useState('');
+    const [receiver_2, setreceiver_2] = useState('');
+    // const [sta, set_sta] = useState('');
 
     const handleCreate = f => {
         f.preventDefault();
@@ -41,15 +54,76 @@ function Create({ faculty, setFaculty, setIsCreating }){
         });
     }
 
+
+    // useEffect(() => {
+    //     loadStudents();
+    // }, [])
+
+
+
+    // let loadStudents = async () => {
+    //     const result = await axios.get(`http://127.0.0.1:8000/notesheet/${id}`);
+    //     // console.log(result.data.name);
+    
+    //     setf_id(result.data.f_id);
+    //     setDate(result.data.date);
+    //     setDescription(result.data.desc);
+    //     setObjective(result.data.obj);
+    //     setSchool(result.data.school);
+    //     setDepart(result.data.depart);
+    //     setDetails(result.data.Details);
+    //     setSubject(result.data.sub);
+    //     setpro_de(result.data.pro_de);
+    //     set_prosub(result.data.pro_sub);
+    //     set_prosub1(result.data.pro_sub1);
+    //     setreceiver_1(result.data.receiver_1);
+    //     set_sta(result.data.sta);
+    //    }
+  
+  
+       const updateSingleStudent = async () => {
+          let formField = new FormData()
+  
+        //   formField.append('f_id',f_id)
+          formField.append('date',date)
+          formField.append('school',school)
+          formField.append('department',depart)
+          formField.append('subject',sub)
+          formField.append('description',desc)
+          formField.append('objective',obj)
+          formField.append('proposal_details',details)
+          formField.append('proposal_submitted_by',pro_sub)
+          formField.append('proposal_submitted_by_1',pro_sub1)
+          formField.append('receiver_1',receiver_1)
+          formField.append('receiver_2',receiver_2)
+        //   formField.append('Status',sta)
+  
+          // if(image !== null) {
+          //   formField.append('image', image)
+          // }
+  
+          await axios({
+              method: 'post',
+              url: `http://127.0.0.1:8000/notesheet/`,
+              data: formField
+          }).then(response => {
+              console.log(response.data);
+            //   navigate('/home');
+          })
+  
+      }
+
     return (
         <div className='container'>
             <h1 class="header1">Create Notesheet</h1>
             <form onSubmit={handleCreate}>
+
+            
                 <div className='input-box'>
                     <label htmlFor='date'>Date</label>
                     <input id='date' placeholder='Enter Date' type='date' name='date' value={date} onChange={f => setDate(f.target.value)} />
                 </div>
-                <div className='column'>
+                {/* <div className='column'>
                 <div className='input-box'>
                     <label htmlFor='school'>School</label>
                     <div className='select-box'>
@@ -76,24 +150,33 @@ function Create({ faculty, setFaculty, setIsCreating }){
                     </div>
                     </div>
                 </div>
+                </div> */}
+                <div className='input-box'>
+                    <label htmlFor='date'>Date</label>
+                    <input id='date4' placeholder='school' type='text' name='school' value={school} onChange={f => setSchool(f.target.value)} />
+                </div>
+                 
+                <div className='input-box'>
+                    <label htmlFor='date'>Date</label>
+                    <input id='date6' placeholder='department' type='text' name='department' value={depart} onChange={f => setDepart(f.target.value)} />
                 </div>
                 <div class="input-box">
                     <label htmlFor='subject'>Subject</label>
-                    <input id='sub' name='sub' value={sub} onChange={f => setSubject(f.target.value)} type="text" placeholder="Enter subject of the note sheet"/>
+                    <input id='sub' name='subject' value={sub} onChange={f => setSubject(f.target.value)} type="text" placeholder="Enter subject of the note sheet"/>
                 </div>
                 <div class="input-box">
                     <label htmlFor='desc'>Description</label>
-                    <input id='desc' name='desc' value={desc} onChange={f => setDescription(f.target.value)} type="text" placeholder="Enter subject of the note sheet" />
+                    <input id='desc' name='description' value={desc} onChange={f => setDescription(f.target.value)} type="text" placeholder="description" />
                 </div>
                 <div class="input-box">
                     <label htmlFor='obj'>Objective</label>
-                    <input id='obj' name='obj' value={obj} onChange={f => setObjective(f.target.value)} type="text" placeholder="Enter subject of the note sheet" />
+                    <input id='obj' name='objective' value={obj} onChange={f => setObjective(f.target.value)} type="text" placeholder="objective" />
                 </div>
                 <div class="input-box">
                     <label htmlFor='details'>Details</label>
-                    <input id='details' name='details' value={details} onChange={f => setDetails(f.target.value)} type="text" placeholder="Enter subject of the note sheet" />
+                    <input id='details' name='proposal_details' value={details} onChange={f => setDetails(f.target.value)} type="text" placeholder="proposal_details" />
                 </div>
-                <div className='column'>
+                {/* <div className='column'>
                     <div className='input-box'>
                         <label> Proposal Submitted By</label>
                         <input id='convener' name='convener' type='text' placeholder='Convener 1' />
@@ -102,8 +185,26 @@ function Create({ faculty, setFaculty, setIsCreating }){
                         <label> Proposal Submitted By</label>
                         <input id='convener' name='convener' type='text' placeholder='Convener 2' />
                     </div>
+                </div> */}
+                   <div class="input-box">
+                    <label htmlFor='details'>Details</label>
+                    <input id='details' name='proposal_submitted_by' value={pro_sub} onChange={f => set_prosub(f.target.value)} type="text" placeholder="proposal_submitted_by" />
+                </div>
+                <div class="input-box">
+                    <label htmlFor='details'>Details</label>
+                    <input id='details' name='proposal_submitted_by_1' value={pro_sub1} onChange={f => set_prosub1(f.target.value)} type="text" placeholder="proposal_submitted_by_1" />
+                </div>
+
+                <div className='input-box'>
+                    <label htmlFor='date'>Date</label>
+                    <input id='receiver_1' placeholder='receiver_1' type='text' name='receiver_1' value={receiver_1} onChange={f => setreceiver_1(f.target.value)} />
                 </div>
                 <div className='input-box'>
+                    <label htmlFor='date'>Date</label>
+                    <input id='receiver_2' placeholder='receiver_2' type='text' name='receiver_2' value={receiver_2} onChange={f => setreceiver_2(f.target.value)} />
+                </div>
+               
+                {/* <div className='input-box'>
                     <label htmlFor='receivers'>Select Authorities for Approval</label>
                     <div className='select-box'>
                         <select required>
@@ -113,7 +214,7 @@ function Create({ faculty, setFaculty, setIsCreating }){
                             <option>Others</option>
                         </select>
                     </div>
-                </div>
+                </div> */}
                 {/* <div className='gender-box'>
                     <h3>Select Authorities for Approval</h3>
                     <div class="gender-option">
@@ -129,6 +230,8 @@ function Create({ faculty, setFaculty, setIsCreating }){
                 <input type="submit" value="Create" />
                 <input className="muted-button" type="button" value="Cancel" onClick={() => setIsCreating(false)} />
             </div>
+            <button onClick={updateSingleStudent} className="btn btn-primary btn-block">Update Student</button>
+
         </form>
         </div>
     );
