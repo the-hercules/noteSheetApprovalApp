@@ -3,13 +3,17 @@ from django.db import models
 
 # Create your models here
 
-# class AllFacultyUsers(models.Model):
-#     username = models.CharField()
-#     password = models.CharField(max_length=25)
-#     employee_id = models.CharField(max_length=20)
-#     name = models.CharField()
-#     Dob = models.DateField()
-#
+class AllFacultyUsers(models.Model):
+    username = models.CharField(max_length=255)
+    password = models.CharField(max_length=30)
+    employee_id = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    designation = models.CharField(max_length=255)
+    school = models.CharField(max_length=255)
+    mobile_number = models.IntegerField()
+    email_address = models.CharField(max_length=255)
+
 
 # class SenderDetails(models.Model):
 #     sender_id = models.ForeignKey(AllFacultyUsers, on_delete=models.SET_NULL)
@@ -24,7 +28,7 @@ class FacultyDetails(models.Model):
 
 class NoteSheet(models.Model):
     f_id = models.ForeignKey(
-        FacultyDetails, on_delete=models.SET_NULL,null=True)
+        FacultyDetails, on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(auto_now_add=True)
     # date = models.DateTimeField(format='%d-%m-%Y %H:%M', auto_now_add=True)
     subject = models.TextField()

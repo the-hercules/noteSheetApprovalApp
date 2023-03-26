@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import NoteSheet, FacultyDetails
+from .models import NoteSheet, FacultyDetails,AllFacultyUsers
 
 
 class NoteSheetSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,3 +15,10 @@ class FacultyDetailsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = FacultyDetails
         fields = ('employee_id', 'Name')
+
+
+class AllFacultyUsersSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model= AllFacultyUsers
+        fields=('username','password','employee_id','first_name','last_name','designation',
+                'school', 'mobile_number','email_address')
