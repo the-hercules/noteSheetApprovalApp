@@ -13,23 +13,16 @@ class AllFacultyUsers(models.Model):
     school = models.CharField(max_length=255)
     mobile_number = models.IntegerField()
     email_address = models.CharField(max_length=255)
-
-
-# class SenderDetails(models.Model):
-#     sender_id = models.ForeignKey(AllFacultyUsers, on_delete=models.SET_NULL)
-#     sender = models.CharField(max_length=50)
+    is_admin=models.BooleanField(default=False)
 
 class FacultyDetails(models.Model):
+    ns_id = models.IntegerField()
     employee_id = models.CharField(max_length=20)
-    Name = models.CharField(max_length=50)
+    sender_name = models.CharField(max_length=50)
 
-
-# this sender field is tentative
 
 class NoteSheet(models.Model):
-    f_id = models.ForeignKey(
-        FacultyDetails, on_delete=models.SET_NULL, null=True)
-    date = models.DateTimeField(auto_now_add=True)
+    date_of_creation = models.DateTimeField(auto_now_add=True)
     # date = models.DateTimeField(format='%d-%m-%Y %H:%M', auto_now_add=True)
     subject = models.TextField()
     school = models.CharField(max_length=100)
@@ -42,7 +35,3 @@ class NoteSheet(models.Model):
     receiver_1 = models.CharField(max_length=255)
     receiver_2 = models.CharField(max_length=255)
     Status = models.IntegerField(default='000')
-
-# class NoteSheetAdditional(models.Model):
-#     f_id = models.ForeignKey(NoteSheet, on_delete=models.SET_NULL, null=True)
-#     Status = models.IntegerField()

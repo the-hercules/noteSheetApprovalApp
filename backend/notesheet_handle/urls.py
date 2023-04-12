@@ -11,7 +11,7 @@ router.register(r'allUsers', views.AllFacultyUsersViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
-    path('current_user/', get_current_user),
-    path('users/create', CreateUserView.as_view())
+    # path('current_user/', get_current_user),
+    # path('users/create', CreateUserView.as_view())
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
