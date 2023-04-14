@@ -25,8 +25,9 @@ class FacultyDetailsViewSet(viewsets.ModelViewSet):
 
 
 class AllFacultyUsersViewSet(viewsets.ModelViewSet):
-    queryset = AllFacultyUsers.objects.all()
-    serializer_class = AllFacultyUsersSerializer
+    queryset = FacultyProfile.objects.all()
+    serializer_class = FacultyProfileSerializer
+
 
 # for auth
 @api_view(['GET'])

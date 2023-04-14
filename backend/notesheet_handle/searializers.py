@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import NoteSheet, FacultyDetails, AllFacultyUsers
+from .models import NoteSheet, FacultyDetails, FacultyProfile
 from django.contrib.auth.models import User
 from rest_framework.settings import api_settings
 
@@ -17,9 +17,9 @@ class FacultyDetailsSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('__all__')
 
 
-class AllFacultyUsersSerializer(serializers.HyperlinkedModelSerializer):
+class FacultyProfileSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = AllFacultyUsers
+        model = FacultyProfile
         # fields = (
         #     'is_admin', 'first_name', 'last_name', 'employee_id', 'designation',
         #     'school', 'department', 'mobile_number',

@@ -1,17 +1,11 @@
 from __future__ import unicode_literals
-from django.utils import timezone
-from django.contrib.auth.models import (
-    AbstractBaseUser, PermissionsMixin
-)
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class AllFacultyUsers(models.Model):
-    username = models.CharField(max_length=255)
-    password = models.CharField(max_length=30)
+class FacultyProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     employee_id = models.CharField(max_length=20)
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
     designation = models.CharField(max_length=255)
     school = models.CharField(max_length=255)
     department = models.CharField(max_length=255, default='cse')
