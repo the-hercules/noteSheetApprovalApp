@@ -17,11 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 # from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView)
-
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('notesheet_handle.urls'), name='home'),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/', views.CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

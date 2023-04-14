@@ -1,7 +1,14 @@
+import json
+from itertools import chain
+
+from django.core.serializers import serialize
+from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.views import TokenObtainPairView
+
 from .searializers import *
 
 
@@ -18,22 +25,36 @@ class NoteSheetViewSet(viewsets.ModelViewSet):
 
 
 #
-class FacultyDetailsViewSet(viewsets.ModelViewSet):
-    # class NoteSheetViewSet(generics.ListCreateAPIView):
-    queryset = FacultyDetails.objects.all()
-    serializer_class = FacultyDetailsSerializer
-
-
-class AllFacultyUsersViewSet(viewsets.ModelViewSet):
-    queryset = FacultyProfile.objects.all()
-    serializer_class = FacultyProfileSerializer
+# class FacultyDetailViewSetBYID(viewsets.ModelViewSet):
+# queryset = FacultyProfile.objects.filter(user=)
 
 
 # for auth
 @api_view(['GET'])
 def get_current_user(request):
+    # print(request.token)
     serializer = GetFullUserSerializer(request.user)
+    # print(request.user.id)
+
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_faculty_profile(request):
+    r_id = request.user.id
+    data = FacultyProfile.objects.filter(user=r_id).values('is_admin', 'employee_id', 'designation', 'school',
+                                                           'department', 'mobile_number', 'email_address')
+    data2 = User.objects.filter(id=r_id).values('first_name', 'last_name')
+    qset = list(chain(data, data2))
+    fset = {}
+    for i in qset:
+        for key, value in i.items():
+            fset[key] = value
+    return HttpResponse(json.dumps(fset), content_type='application/json')
+
+
+# @api_view(['POST'])
+# def get_user(request):
 
 
 class CreateUserView(APIView):

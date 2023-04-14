@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class FacultyProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    employee_id = models.CharField(max_length=20)
+    employee_id = models.CharField(max_length=20,primary_key=True)
     designation = models.CharField(max_length=255)
     school = models.CharField(max_length=255)
     department = models.CharField(max_length=255, default='cse')

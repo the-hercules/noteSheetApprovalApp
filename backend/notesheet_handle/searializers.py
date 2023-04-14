@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from .models import NoteSheet, FacultyDetails, FacultyProfile
 from django.contrib.auth.models import User
@@ -27,6 +28,15 @@ class FacultyProfileSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('__all__')
 # adding serializers for auth
 
+class FacultyProfileSerializerWithID(serializers.ModelSerializer):
+    class Meta:
+        model = FacultyProfile
+        # fields = (
+        #     'is_admin', 'first_name', 'last_name', 'employee_id', 'designation',
+        #     'school', 'department', 'mobile_number',
+        #     'email_address')
+        fields = ('__all__')
+# adding serializers for auth
 class GetFullUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -62,3 +72,6 @@ class UserSerializerWithToken(serializers.ModelSerializer):
         model = User
         fields = ('token', 'username', 'password', 'first_name',
                   'last_name')
+
+
+
