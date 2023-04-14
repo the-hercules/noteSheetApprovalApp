@@ -124,23 +124,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_ALLOW_ALL = True
 
 # for auth
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#     ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-#         'rest_framework_simplejwt.authentication.JWTAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#         'rest_framework.authentication.BasicAuthentication',
-#     ),
-# }
-# CORS_ALLOW_CREDENTIALS = True
-#
-# JWT_AUTH = {
-#     'JWT_RESPONSE_PAYLOAD_HANDLER': 'simple_rest.utils.custom_jwt_response_handler'
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+CORS_ALLOW_CREDENTIALS = True
 
-# LOGIN_URL = 'login'
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'simple_rest.utils.custom_jwt_response_handler'
+}
+
+LOGIN_URL = 'login'
 # LOGIN_REDIRECT_URL = 'localhost:3000'
-# LOGIN_REDIRECT_URL = 'home'

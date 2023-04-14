@@ -1,7 +1,10 @@
+from __future__ import unicode_literals
+from django.utils import timezone
+from django.contrib.auth.models import (
+    AbstractBaseUser, PermissionsMixin
+)
 from django.db import models
 
-
-# Create your models here
 
 class AllFacultyUsers(models.Model):
     username = models.CharField(max_length=255)
@@ -11,9 +14,11 @@ class AllFacultyUsers(models.Model):
     last_name = models.CharField(max_length=255)
     designation = models.CharField(max_length=255)
     school = models.CharField(max_length=255)
+    department = models.CharField(max_length=255, default='cse')
     mobile_number = models.IntegerField()
     email_address = models.CharField(max_length=255)
-    is_admin=models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+
 
 class FacultyDetails(models.Model):
     ns_id = models.IntegerField()
